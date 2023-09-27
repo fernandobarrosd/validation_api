@@ -1,11 +1,18 @@
-FROM openjdk
+FROM maven as build
 
 
-WORKDIR /app
+COPY . . 
 
-COPY target/cpf_validation_api-0.0.1-SNAPSHOT.jar cpf_validation_api.jar
+RUN mvn package
+
+FROM openjdk:17
+
+
+COPY --from=build /target/validation_api-0.0.1-SNAPSHOT.jar validation_api.jar
+
+
 
 EXPOSE 8080
 
 
-ENTRYPOINT ["java", "-jar", "cpf_validation_api.jar"]
+ENTRYPOINT ["java", "-jar", "validation_api.jar"]
