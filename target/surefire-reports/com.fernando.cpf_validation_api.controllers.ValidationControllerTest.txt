@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.fernando.cpf_validation_api.controllers.ValidationControllerTest
+-------------------------------------------------------------------------------
+Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.652 s - in com.fernando.cpf_validation_api.controllers.ValidationControllerTest

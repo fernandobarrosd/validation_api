@@ -1,0 +1,14 @@
+C:\Users\fdeba\Documents\java_projects\validation_api\src\main\java\com\fernando\validation_api\dtos\responses\CpfDTO.java
+C:\Users\fdeba\Documents\java_projects\validation_api\src\main\java\com\fernando\validation_api\dtos\responses\EmailDTO.java
+C:\Users\fdeba\Documents\java_projects\validation_api\src\main\java\com\fernando\validation_api\dtos\responses\CnpjDTO.java
+C:\Users\fdeba\Documents\java_projects\validation_api\src\main\java\com\fernando\validation_api\validations\annotations\ValidEmail.java
+C:\Users\fdeba\Documents\java_projects\validation_api\src\main\java\com\fernando\validation_api\factories\ResponseEntityErrorFactory.java
+C:\Users\fdeba\Documents\java_projects\validation_api\src\main\java\com\fernando\validation_api\dtos\requests\ValidateCnpjDTO.java
+C:\Users\fdeba\Documents\java_projects\validation_api\src\main\java\com\fernando\validation_api\validations\ValidEmailValidator.java
+C:\Users\fdeba\Documents\java_projects\validation_api\src\main\java\com\fernando\validation_api\dtos\responses\ResponseError.java
+C:\Users\fdeba\Documents\java_projects\validation_api\src\main\java\com\fernando\validation_api\controllers\ValidationController.java
+C:\Users\fdeba\Documents\java_projects\validation_api\src\main\java\com\fernando\validation_api\ValidationApiApplication.java
+C:\Users\fdeba\Documents\java_projects\validation_api\src\main\java\com\fernando\validation_api\dtos\requests\ValidateCpfDTO.java
+C:\Users\fdeba\Documents\java_projects\validation_api\src\main\java\com\fernando\validation_api\handlers\ExceptionHandlers.java
+C:\Users\fdeba\Documents\java_projects\validation_api\src\main\java\com\fernando\validation_api\dtos\requests\ValidateEmailDTO.java
+C:\Users\fdeba\Documents\java_projects\validation_api\src\main\java\com\fernando\validation_api\exceptions\RequestBodyException.java

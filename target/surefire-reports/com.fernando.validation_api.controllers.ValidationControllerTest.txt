@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.fernando.validation_api.controllers.ValidationControllerTest
+-------------------------------------------------------------------------------
+Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.916 s - in com.fernando.validation_api.controllers.ValidationControllerTest
