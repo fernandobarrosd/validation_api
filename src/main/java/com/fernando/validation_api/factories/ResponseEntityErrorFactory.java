@@ -16,4 +16,16 @@ public abstract class ResponseEntityErrorFactory {
         ResponseError responseError = new ResponseError(message, HttpStatus.BAD_REQUEST.value());
         return new ResponseEntity<>(responseError, HttpStatusCode.valueOf(HttpStatus.NOT_FOUND.value()));
     }
+
+    public static ResponseEntity<Object> withMethodNotAlowed(String requestMethodName) {
+        HttpStatus httpStatus = HttpStatus.METHOD_NOT_ALLOWED;
+
+        String message = String.format("Method %s doesn't alowed", 
+        requestMethodName);
+        ResponseError responseError = new ResponseError(message,
+        httpStatus.value());
+
+        return new ResponseEntity<>
+        (responseError, HttpStatusCode.valueOf(httpStatus.value()));
+    }
 }

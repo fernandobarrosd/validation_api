@@ -16,6 +16,7 @@ import com.fernando.validation_api.dtos.responses.CpfDTO;
 import com.fernando.validation_api.dtos.responses.CnpjDTO;
 import com.fernando.validation_api.dtos.responses.EmailDTO;
 import com.fernando.validation_api.dtos.responses.ResponseError;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 @WebMvcTest(ValidationController.class)
@@ -27,9 +28,17 @@ public class ValidationControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    void assertRequestGET(String requestURL, Object requestBody, Object responseBody) throws Exception {
-        mockMvc.perform(get(requestURL).contentType(MediaType.APPLICATION_JSON)
+    void assertRequestPOST(String requestURL, Object requestBody, Object responseBody) throws Exception {
+        mockMvc.perform(post(requestURL).contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(requestBody)))
+                .andDo(print())
+                .andExpect(
+                        content()
+                                .json(objectMapper.writeValueAsString(responseBody)));
+    }
+
+    void assertRequestPOST(String requestURL, Object responseBody) throws Exception {
+        mockMvc.perform(post(requestURL).contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(
                         content()
@@ -49,7 +58,7 @@ public class ValidationControllerTest {
         ValidateCpfDTO validateCpfDTO = new ValidateCpfDTO("136.775.118-79");
         CpfDTO cpfDTO = new CpfDTO(validateCpfDTO.cpf());
 
-        assertRequestGET("/validations/cpf", validateCpfDTO, cpfDTO);
+        assertRequestPOST("/validations/cpf", validateCpfDTO, cpfDTO);
     }
 
     @Test
@@ -57,7 +66,7 @@ public class ValidationControllerTest {
         ValidateEmailDTO validateEmailDTO = new ValidateEmailDTO("fbarros@gmail.com");
         EmailDTO emailDTO = new EmailDTO(validateEmailDTO.email());
 
-        assertRequestGET("/validations/email", validateEmailDTO, emailDTO);
+        assertRequestPOST("/validations/email", validateEmailDTO, emailDTO);
     }
 
     @Test
@@ -66,7 +75,7 @@ public class ValidationControllerTest {
 
         CnpjDTO cnpjDTO = new CnpjDTO(validateCpnjDTO.cnpj());
 
-        assertRequestGET("/validations/cnpj", validateCpnjDTO, cnpjDTO);
+        assertRequestPOST("/validations/cnpj", validateCpnjDTO, cnpjDTO);
     }
 
     @Test
@@ -74,7 +83,7 @@ public class ValidationControllerTest {
         ValidateCpfDTO validateCpfDTO = new ValidateCpfDTO("000.000.000-00");
         ResponseError responseError = new ResponseError("CPF doesn't valid", HttpStatus.BAD_REQUEST.value());
 
-        assertRequestGET("/validations/cpf", validateCpfDTO, responseError);
+        assertRequestPOST("/validations/cpf", validateCpfDTO, responseError);
     }
 
     @Test
@@ -84,7 +93,7 @@ public class ValidationControllerTest {
         ValidateEmailDTO validateEmailDTO = new ValidateEmailDTO("fbarros");
         ResponseError responseError = new ResponseError("Email doesn't valid", HttpStatus.BAD_REQUEST.value());
 
-        assertRequestGET("/validations/email", validateEmailDTO, responseError);
+        assertRequestPOST("/validations/email", validateEmailDTO, responseError);
     }
 
     @Test
@@ -94,7 +103,7 @@ public class ValidationControllerTest {
         ValidateCnpjDTO validateCpnjDTO = new ValidateCnpjDTO("99.999.999/9999-99");
         ResponseError responseError = new ResponseError("CNPJ doesn't valid", HttpStatus.BAD_REQUEST.value());
 
-        assertRequestGET("/validations/cnpj", validateCpnjDTO, responseError);
+        assertRequestPOST("/validations/cnpj", validateCpnjDTO, responseError);
     }
 
     @Test
@@ -104,7 +113,7 @@ public class ValidationControllerTest {
         ValidateCnpjDTO validateCpnjDTO = new ValidateCnpjDTO("");
         ResponseError responseError = new ResponseError("CNPJ doesn't valid", HttpStatus.BAD_REQUEST.value());
 
-        assertRequestGET("/validations/cnpj", validateCpnjDTO, responseError);
+        assertRequestPOST("/validations/cnpj", validateCpnjDTO, responseError);
 
     }
 
@@ -114,7 +123,7 @@ public class ValidationControllerTest {
         ValidateCpfDTO validateCpfDTO = new ValidateCpfDTO("");
         ResponseError responseError = new ResponseError("CPF doesn't valid", HttpStatus.BAD_REQUEST.value());
 
-        assertRequestGET("/validations/cpf", validateCpfDTO, responseError);
+        assertRequestPOST("/validations/cpf", validateCpfDTO, responseError);
     }
 
     @Test
@@ -123,7 +132,7 @@ public class ValidationControllerTest {
         ValidateCnpjDTO validateCpnjDTO = new ValidateCnpjDTO(null);
         ResponseError responseError = new ResponseError("CNPJ value doesn't found", HttpStatus.BAD_REQUEST.value());
 
-        assertRequestGET("/validations/cnpj", validateCpnjDTO, responseError);
+        assertRequestPOST("/validations/cnpj", validateCpnjDTO, responseError);
     }
 
     @Test
@@ -132,7 +141,7 @@ public class ValidationControllerTest {
         ValidateCpfDTO validateCpfDTO = new ValidateCpfDTO(null);
         ResponseError responseError = new ResponseError("CPF value doesn't found", HttpStatus.BAD_REQUEST.value());
 
-        assertRequestGET("/validations/cpf", validateCpfDTO, responseError);
+        assertRequestPOST("/validations/cpf", validateCpfDTO, responseError);
     }
 
     @Test
@@ -141,7 +150,7 @@ public class ValidationControllerTest {
         ResponseError responseError = new ResponseError("Email endpoint require body with Email value",
                 HttpStatus.BAD_REQUEST.value());
 
-        assertRequestGET("/validations/email", responseError);
+        assertRequestPOST("/validations/email", responseError);
     }
 
     @Test
@@ -150,7 +159,7 @@ public class ValidationControllerTest {
         ResponseError responseError = new ResponseError("CPF endpoint require body with CPF value",
                 HttpStatus.BAD_REQUEST.value());
 
-        assertRequestGET("/validations/cpf", responseError);
+        assertRequestPOST("/validations/cpf", responseError);
 
     }
 
@@ -160,7 +169,17 @@ public class ValidationControllerTest {
         ResponseError responseError = new ResponseError("CNPJ endpoint require body with CNPJ value",
                 HttpStatus.BAD_REQUEST.value());
 
-        assertRequestGET("/validations/cnpj", responseError);
+        assertRequestPOST("/validations/cnpj", responseError);
+
+    }
+
+    @Test
+    void shouldReturnErrorResponseErrorWithMethodGetDoesNotAlowedMessageToRequireWithGETMethod()
+            throws Exception {
+        ResponseError responseError = new ResponseError("Method GET doesn't alowed",
+                HttpStatus.METHOD_NOT_ALLOWED.value());
+
+        assertRequestGET("/validations/email", responseError);
 
     }
 
