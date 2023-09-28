@@ -10,11 +10,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fernando.validation_api.dtos.requests.ValidateCpfDTO;
+import com.fernando.enums.RequestMethod;
 import com.fernando.validation_api.dtos.requests.ValidateCnpjDTO;
 import com.fernando.validation_api.dtos.requests.ValidateEmailDTO;
 import com.fernando.validation_api.dtos.responses.CpfDTO;
 import com.fernando.validation_api.dtos.responses.CnpjDTO;
 import com.fernando.validation_api.dtos.responses.EmailDTO;
+import com.fernando.validation_api.dtos.responses.MethodNotAlowedResponseError;
 import com.fernando.validation_api.dtos.responses.ResponseError;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -176,8 +178,10 @@ public class ValidationControllerTest {
     @Test
     void shouldReturnErrorResponseErrorWithMethodGetDoesNotAlowedMessageToRequireWithGETMethod()
             throws Exception {
-        ResponseError responseError = new ResponseError("Method GET doesn't alowed",
-                HttpStatus.METHOD_NOT_ALLOWED.value());
+        MethodNotAlowedResponseError responseError = new MethodNotAlowedResponseError
+        ("Method GET doesn't alowed",
+                HttpStatus.METHOD_NOT_ALLOWED.value(),
+                RequestMethod.GET.getValue());
 
         assertRequestGET("/validations/email", responseError);
 

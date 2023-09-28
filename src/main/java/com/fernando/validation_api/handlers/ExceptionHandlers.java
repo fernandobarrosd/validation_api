@@ -50,7 +50,7 @@ public class ExceptionHandlers extends ResponseEntityExceptionHandler {
         HttpRequestMethodNotSupportedException e,
             HttpHeaders headers, HttpStatusCode status, WebRequest request) {
                 String requestMethodName = e.getMethod();
-
+                
                 return ResponseEntityErrorFactory
                 .withMethodNotAlowed(requestMethodName);
     }
