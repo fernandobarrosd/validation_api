@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
 import org.springframework.validation.FieldError;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -40,6 +41,18 @@ public class ExceptionHandlers extends ResponseEntityExceptionHandler {
             HttpStatusCode status, WebRequest request) {
                 String endpointUrl = e.getRequestURL();
                 return ResponseEntityErrorFactory.withNotFound(endpointUrl);
+    }
+
+
+    @Override
+    @Nullable
+    protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(
+        HttpRequestMethodNotSupportedException e,
+            HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+                String requestMethodName = e.getMethod();
+                
+                return ResponseEntityErrorFactory
+                .withMethodNotAlowed(requestMethodName);
     }
 
     

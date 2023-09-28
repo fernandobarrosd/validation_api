@@ -1,7 +1,7 @@
 package com.fernando.validation_api.controllers;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,7 +18,7 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/validations")
 public class ValidationController {
-    @GetMapping("/cpf")
+    @PostMapping("/cpf")
     public @ResponseBody ResponseEntity<CpfDTO> validateCPF(
         @RequestBody(required = false)
         @Valid ValidateCpfDTO validateCPFDao) {
@@ -29,7 +29,7 @@ public class ValidationController {
         return ResponseEntity.ok().body(cpfDTO);
     }
 
-    @GetMapping("/email")
+    @PostMapping("/email")
     public @ResponseBody ResponseEntity<EmailDTO> validateEmail(
         @RequestBody(required = false)
         @Valid ValidateEmailDTO validateEmailDAO) {
@@ -40,7 +40,7 @@ public class ValidationController {
         return ResponseEntity.ok().body(emailDTO);
     }
 
-    @GetMapping("/cnpj")
+    @PostMapping("/cnpj")
     public @ResponseBody ResponseEntity<CnpjDTO> validateCPNJ(
         @RequestBody(required = false)
         @Valid ValidateCnpjDTO validateCPNJDTO) {
