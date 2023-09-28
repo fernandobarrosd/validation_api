@@ -13,7 +13,6 @@ import com.fernando.validation_api.dtos.responses.CpfDTO;
 import com.fernando.validation_api.dtos.responses.CnpjDTO;
 import com.fernando.validation_api.dtos.responses.EmailDTO;
 import com.fernando.validation_api.exceptions.RequestBodyException;
-
 import jakarta.validation.Valid;
 
 @RestController
