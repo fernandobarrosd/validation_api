@@ -9,6 +9,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import com.fernando.validation_api.exceptions.RequestBodyException;
 import com.fernando.validation_api.factories.ResponseEntityErrorFactory;
@@ -31,6 +32,17 @@ public class ExceptionHandlers extends ResponseEntityExceptionHandler {
         String errorMessage = e.getMessage();
         return ResponseEntityErrorFactory.withBadRequest(errorMessage);
     }
+
+
+    @Override
+    @Nullable
+    protected ResponseEntity<Object> handleNoHandlerFoundException(NoHandlerFoundException e, HttpHeaders headers,
+            HttpStatusCode status, WebRequest request) {
+                String endpointUrl = e.getRequestURL();
+                return ResponseEntityErrorFactory.withNotFound(endpointUrl);
+    }
+
+    
     
 
 
