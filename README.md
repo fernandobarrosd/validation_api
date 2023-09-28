@@ -8,7 +8,7 @@ A Validations API é um serviço simples que permite validar endereços de e-mai
 
 Este recurso permite a validação de endereços de e-mail.
 
-Método: **GET**
+Método: **POST**
 
 Corpo da Requisição: **JSON**
 
@@ -22,7 +22,7 @@ Corpo da Requisição: **JSON**
 #### Exemplo de Requisição:
 
 ```bash
-GET /validations/email
+POST /validations/email
 Content-Type: application/json
 
 {
@@ -46,7 +46,7 @@ Content-Type: application/json
 
 Este recurso permite a validação de números de CPF (Cadastro de Pessoas Físicas).
 
-Método: **GET**
+Método: **POST**
 
 Corpo da Requisição: **JSON**
 
@@ -60,7 +60,7 @@ Corpo da Requisição: **JSON**
 
 ````bash
 
-GET /validations/cpf
+POST /validations/cpf
 Content-Type: application/json
 
 {
@@ -81,7 +81,7 @@ Content-Type: application/json
 
 Este recurso permite a validação de números de CNPJ (Cadastro Nacional da Pessoa Jurídica).
 
-Método: **GET**
+Método: **POST**
 
 Corpo da Requisição: **JSON**
 
@@ -92,7 +92,7 @@ Corpo da Requisição: **JSON**
 ````
 
 ```` bash
-GET /validations/cnpj
+POST /validations/cnpj
 Content-Type: application/json
 
 {
